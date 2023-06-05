@@ -7,20 +7,36 @@
   <img src="https://media.giphy.com/media/hu1TLAaubiak9S4GT6/giphy.gif" width="600"/>
 </div>
 <div id="badges" align="center">
-  <div style="display: flex; align-items: center;">
-    <div style="flex: 1;">
-      <h1 style="color: white; font-size: 24px; padding: 20px; background-color: rgba(0, 0, 0, 0.7);">Tout d'abord présentons les aventuriers:</h1>
-      <h2 style="color: white; font-size: 24px; padding: 20px; background-color: rgba(0, 0, 0, 0.7);">Arthur l'intrépide</h2>
-      <h3 style="color: white; font-size: 24px; padding: 20px; background-color: rgba(0, 0, 0, 0.7);">David le fougueux</h3>
-      <h3 style="color: white; font-size: 24px; padding: 20px; background-color: rgba(0, 0, 0, 0.7);">Et pour finir Théo le téméraire</h3>
-    </div>
-    <div style="flex: 1;">
+  <h1 style="color: white; font-size: 24px; padding: 20px; background-color: rgba(0, 0, 0, 0.7);">Tout d'abord, présentons les aventuriers :</h1>
+  <h2 style="color: white; font-size: 24px; padding: 20px; background-color: rgba(0, 0, 0, 0.7);border-top: none;">Arthur l'intrépide</h2>
+    <a href="https://www.linkedin.com/in/th%C3%A9o-pinardin-728884209/" style="display: flex; justify-content: center; align-items: center;">
+        <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
+      </a>  
+  <h3 style="color: white; font-size: 24px; padding: 20px; background-color: rgba(0, 0, 0, 0.7);">David le fougueux</h3>
       <a href="https://www.linkedin.com/in/th%C3%A9o-pinardin-728884209/" style="display: flex; justify-content: center; align-items: center;">
-        <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"  "test"/>
+        <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
       </a>
-    </div>
-  </div>
+  <h4 style="color: white; font-size: 24px; padding: 20px; background-color: rgba(0, 0, 0, 0.7);">Et pour finir Théo le téméraire</h4>
+      <a href="https://www.linkedin.com/in/th%C3%A9o-pinardin-728884209/" style="display: flex; justify-content: center; align-items: center;">
+        <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
+      </a>
+    
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div>
   <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
