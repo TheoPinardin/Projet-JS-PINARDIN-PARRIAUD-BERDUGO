@@ -28,32 +28,9 @@
  </div>
 </div>
 
+## Présentation du projet
 
-### Installation
-Pour commencer nous allons avoir besoin d'un environnement de travail, installer node js via ce lien ->
-https://nodejs.org/fr/download
-
-Ou sinon à l'ouverture de Webstorm, l'IDE propose de le faire à votre place.
-
-En suite il va nous falloir un installateur de package:
-
-Par défaut npm est installé quand vous installez NodeJs.
-
-Pour ceux qui veulent utiliser Yarn pas de problème.
-
-Ouvrez votre cmd et tapez:
-
-    npm install --global yarn
-    
-Vous pouvez vérifier la bonne installation de yarn comme ceci:
-
-    npm --version
-   
-De même pour nodeJs:
-
-    node --version
-
-
+Nous avons créé un programme qui résout des équations polynomiales de degré 2 en trouvant les racines du polynôme. Les racines peuvent être réelles ou imaginaires. Tout cela a été fait en Javascript fonctionnel avec l'aide de la librairie Ramda.
 ## Ressources
 
 [Ramda Documentation](https://ramdajs.com/docs/)
@@ -72,5 +49,65 @@ Le cours initiatique au JS et à l'environnement GitHub de Mr ROBIN Maxime
 
 ## How to run it?
 
+### Installation
+Pour commencer nous allons avoir besoin d'un environnement de travail, installer node js via ce lien ->
+https://nodejs.org/fr/download
 
-blablabla
+Ou sinon à l'ouverture de Webstorm, l'IDE propose de le faire à votre place.
+
+Ensuite il va nous falloir un installateur de package:
+
+Par défaut npm est installé quand vous installez NodeJs.
+
+Pour ceux qui veulent utiliser Yarn pas de problème.
+
+Ouvrez votre cmd et tapez:
+
+    npm install --global yarn
+    
+Vous pouvez vérifier la bonne installation de yarn comme ceci:
+
+    npm --version
+   
+De même pour nodeJs:
+
+    node --version
+    
+Pour installer Ramda:
+
+    npm install ramda
+
+ou bien avec yarn:
+
+    yarn add ramda
+   
+En haut de votre n'oubliez d'ajouter la ligne suivante pour pouvoir utiliser la librairie:
+
+    const R = require('ramda');
+
+### Informations supplémentaires
+Pour lancer ce projet il vous suffit de le télécharger et de le lancer sur un IDE (nous vous conseillons Webstorm) et d'appuyer sur le bouton play.
+Nous avons paramétré par défaut certaines équations. Pour pouvoir utiliser celles que vous souhaitez rien de plus simple.
+Allez à cette section du code dans le V1:
+
+    const Polynomes = [
+    {degre2: 2, degre1: 1, degre0: 15 },
+    {degre2: 14, degre1: 2, degre0: 3},
+    {degre2: -4, degre1: 4, degre0: -1},
+    {degre2: -8, degre1: 6, degre0: 0},
+    {degre2: 4, degre1: 1, degre0: 9},
+    {degre2: 6, degre1: -5, degre0: 4},
+    {degre2: 5, degre1: -9, degre0: -3},
+    {degre2: 4, degre1: -2, degre0: 3},
+    ];
+   
+Et modifiez selon les valeurs selon vos souhaits.
+
+## Remerciements
+
+Nous voulons remercier notre professeur MR ROBIN Maxime pour ce projet.
+
+En effet avec ce challenge nous avons pu découvrir la programmation Js via Ramda et nous familiariser encore plus avec l'environnement de GitHub.
+
+
+
