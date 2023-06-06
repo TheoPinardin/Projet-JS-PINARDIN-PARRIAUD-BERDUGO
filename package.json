@@ -1,7 +1,6 @@
 {
-  "dependencies": {
-    "ramda": "^0.28.0"
-  },
-  "type": "module"
-
+  "devDependencies": {
+    "xo": "^0.54.2",
+    "ramda": "0.29.0"
+  }
 }

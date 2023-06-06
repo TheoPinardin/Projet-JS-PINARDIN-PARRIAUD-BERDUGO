@@ -1,104 +1,77 @@
-//const R = require('ramda');
-//const {on} = require("ramda");
-//let moy;
-import * as R from 'ramda';
-const candidates = [
-    {id: 'a', value: 1, weight: 1},
-    {id: 'b', value: 2, weight: 1},
-    {id: 'c', value: 3, weight: 1},
-    {id: 'd', value: 4, weight: 1},
-    {id: 'e', value: 5, weight: 1},
-    {id: 'f', value: 6, weight: 1},
-    {id: 'g', value: 7, weight: 1},
-    {id: 'h', value: 8, weight: 1},
-    {id: 'i', value: 9, weight: 1},
-    {id: 'j', value: 10, weight: 1},
-    {id: 'k', value: 11, weight: 1},
-    {id: 'l', value: 12, weight: 1},
-    {id: 'm', value: 13, weight: 1},
-    {id: 'n', value: 14, weight: 1},
-    {id: 'o', value: 15, weight: 1},
-    {id: 'p', value: 16, weight: 1}
+
+const R = require('ramda');
+const Polynomes = [
+    {degre2: 2, degre1: 1, degre0: 15 },
+    {degre2: 14, degre1: 2, degre0: 3},
+    {degre2: -4, degre1: 4, degre0: -1},
+    {degre2: -8, degre1: 6, degre0: 0},
+    {degre2: 4, degre1: 1, degre0: 9},
+    {degre2: 6, degre1: -5, degre0: 4},
+    {degre2: 5, degre1: -9, degre0: -3},
+    {degre2: 4, degre1: -2, degre0: 3},
 ];
 
-const consolePrettyList = R.tap(
-    R.pipe(R.pluck('id'), R.join(', '), console.log)
+const square = (x) => x * x;
+const squareRoot = (x) => Math.sqrt(x);
+
+const getDiscriminant = R.pipe(
+    R.converge(R.subtract, [R.pipe(R.prop('degre1'), square),R.pipe(R.converge(R.multiply,[R.prop('degre2'),R.prop('degre0')]), R.multiply(4))])
+    //Discriminant=                      b²                 -                                      a       *        c         *       4
 );
 
-const consolePopulation = R.map(consolePrettyList);
+const getRoot1 = R.converge(R.divide, [R.pipe(R.converge(R.subtract, [R.pipe(R.prop('degre1'), R.multiply(-1)), R.pipe(getDiscriminant, squareRoot)])) , R.pipe(R.prop('degre2'), R.multiply(2)) ]);
+// root1       =                                                                            -b                -         squareroot(Discriminant)       /                       2a
 
-const randomSort = () => Math.random() - 0.5;
+const getRoot2 = R.converge(R.divide, [R.pipe(R.converge(R.add, [R.pipe(R.prop('degre1'), R.multiply(-1)), R.pipe(getDiscriminant, squareRoot)])) , R.pipe(R.prop('degre2'), R.multiply(2)) ]);
+// root2       =                                                                       -b                +         squareroot(Discriminant)       /                       2a
 
-const initGen = R.pipe(R.flip(R.repeat)(5), R.map(R.sort(randomSort)));
+// Discriminant Positif:
 
-const cloneGen = R.clone;
+const addRoots = R.pipe(
+    R.converge(R.assoc('discriminant'),[getDiscriminant, R.identity]),
+    R.converge(R.assoc('root1'), [getRoot1, R.identity]),
+    R.converge(R.assoc('root2'), [getRoot2, R.identity])
+)
 
-const getOneAtRandom = () =>
-    candidates[Math.floor((Math.random() * 100) % candidates.length)];
+// Discriminant Nul:
 
-const firstMuteByPerson = R.map(
-    R.when(() => Math.random() - 0.5 > 0, getOneAtRandom)
-);
-const firstMuteForPop = R.map(firstMuteByPerson);
+const addRoot = R.pipe(
+    R.converge(R.assoc('discriminant'),[getDiscriminant, R.identity]),
+    R.converge(R.assoc('root1'), [getRoot1, R.identity])
+)
+// Discriminant Négatif:
 
-const getRandomPeople = (pop) => Math.floor((Math.random() * 100) % pop.length);
+const getPartialRoot = R.pipe(R.converge(R.divide, [R.pipe(R.prop('degre1'), R.multiply(-1)), R.pipe(R.prop('degre2'), R.multiply(2))]), R.toString);
 
-const secondMuteForPop = (p) => {
-    return R.map(
-        R.addIndex(R.map)((v, idxGene) =>
-            R.when(
-                () => Math.random() - 0.5 > 0,
-                () => p[getRandomPeople(p)][idxGene]
-            )(v)
-        )
-    )(p);
-};
-
-const diff = (a, b) => a.id === b.id;
-const fixPop = R.map(
-    R.pipe(
-        R.uniq,
-        R.converge(R.concat, [R.identity, R.differenceWith(diff, candidates)])
-    )
+const getImRoot1 = R.pipe(
+    R.converge(R.assoc('partial'), [getPartialRoot, R.identity]),
+    R.converge(R.assoc('Im'), [R.converge(R.divide,[R.pipe(getDiscriminant, Math.abs, squareRoot, R.toString), R.pipe(R.prop('degre2'), R.multiply(2), Math.abs)]), R.identity]),
+    R.props(['partial','Im']),
+    R.insert(1,' - '),
+    R.insert(3,'i'),
+    R.join('')
 );
 
-const scoreOne = R.pipe(
-    R.slice(0, 5), R.pluck('value'), R.sum
+const getImRoot2 = R.pipe(
+    R.converge(R.assoc('partial'), [getPartialRoot, R.identity]),
+    R.converge(R.assoc('Im'), [R.converge(R.divide,[R.pipe(getDiscriminant, Math.abs, squareRoot, R.toString), R.pipe(R.prop('degre2'), R.multiply(2), Math.abs)]), R.identity]),
+    R.props(['partial','Im']),
+    R.insert(1,' + '),
+    R.insert(3,'i'),
+    R.join('')
 );
 
-const scorePop = R.pipe(R.map(scoreOne), R.sum);
+const addImRoots = R.pipe(
+    R.converge(R.assoc('discriminant'),[getDiscriminant, R.identity]),
+    R.converge(R.assoc('root1'), [getImRoot1, R.identity]),
+    R.converge(R.assoc('root2'), [getImRoot2, R.identity])
+)
+// Traitement des polynomes :
 
-const sortPop = R.pipe(R.sortBy(scoreOne), R.reverse);
+const addRootsToPolynomes = R.map(R.cond([
+    [polynome => getDiscriminant(polynome) > 0, addRoots],
+    [polynome => getDiscriminant(polynome) < 0, addImRoots],
+    [polynome => getDiscriminant(polynome) === 0, addRoot]
+]));
 
-const mergeWithParents = (parents) => (children) => {
-    const parentsSort = sortPop(parents);
-    const childrenSort = sortPop(children);
-
-    return [...parentsSort.slice(0, 3), ...childrenSort.slice(0, 2)];
-};
-
-const logIter = (p) => {
-    console.log('###################');
-    consolePopulation(p);
-    console.log(scorePop(p));
-    console.log(R.map(scoreOne, p));
-    return p;
-};
-
-const pop0 = initGen(candidates);
-
-const iter = (x) =>
-    R.pipe(
-        cloneGen,
-        firstMuteForPop,
-        secondMuteForPop,
-        fixPop,
-        mergeWithParents(x),
-        logIter
-    )(x);
-
-R.pipe(
-    iter,
-    iter,
-    iter
-)(pop0);
+console.log(addRootsToPolynomes(Polynomes));
