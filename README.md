@@ -70,3 +70,8 @@ Le cours initiatique au JS et à l'environnement GitHub de Mr ROBIN Maxime
 
 [Webstorm, version 2023.1.2](https://www.jetbrains.com/webstorm/promo/)
 
+## How to run it?
+
+
+blablabla
+
